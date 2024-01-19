@@ -1,4 +1,58 @@
 
+
+
+//state
+let currCity = "Mexico";
+let units = "mertic";
+
+// selectors
+let city = document.querySelector(".weather__city");
+let datetime = document.querySelector(".weather__datetime");
+let weather__forecast = document.querySelector('.weather__forecast');
+let weather__temperature = document.querySelector('.weather__temperature');
+let weather__icon = document.querySelector(".weather__icon");
+let weather__minmax = document.querySelector(".weather__minmax");
+let weather__realfeel = document.querySelector(".weather__realfeel");
+let weather__humidity = document.querySelector(".weather__humidity");
+let weather__wind = document.querySelector(".weather__wind");
+let weather__pressure = document.querySelector('.weather__pressure');
+
+
+//search
+document.querySelector(".weather__search").addEventListener('submit', e => {
+    let search = document.querySelector(".weather__searchform").value;
+        
+    //prevent defualt action
+    e.preventDefault();
+
+    // change currcity
+    currCity = search;
+
+    //get weather forecase
+    getWeather()
+    
+    // clear from
+    search = " ";
+})
+
+//units
+document.querySelector(".weather_unit_celsius").addEventListener('click', () => {
+    if(units !=="metric")
+    {
+        units = "metric";
+
+        getWeather()
+    }
+})
+
+document.querySelector(".weather_unit_farenheit").addEventListener('click', ()=>{
+    if(units !=="imperial")
+    {
+        units = "imperial";
+
+        getWeather()
+    }
+})
 function convertTimeStamp(timestamp, timezone)
 {
     const convertTimeZone = timezone / 3600;
@@ -11,7 +65,7 @@ function convertTimeStamp(timestamp, timezone)
         month : "long",
         year : "numeric",
         hour : "numeric",
-        minute : "numberic",
+        minute : "2-digit",
         timeZone:`Etc/GMT${convertTimeZone >= 0 ? "-" : "+"}${Math.abs(convertTimeZone)}`,
         hour12 : true,
     }
@@ -44,57 +98,6 @@ function getWeather(){
 
 
 
-//state
-let currCity = "London";
-let units = "mertic";
 
-// selectors
-let city = document.querySelector(".weather__city");
-let datetime = document.querySelector(".weather__datetime");
-let weather__forecast = document.querySelector('.weather__forecast');
-let weather__temperature = document.querySelector('.weather__temperature');
-let weather__icon = document.querySelector(".weather__icon");
-let weather__minmax = document.querySelector(".weather__minmax");
-let weather__realfeel = document.querySelector(".weather__realfeel");
-let weather__humidity = document.querySelector(".weather__humidity");
-let weather__wind = document.querySelector(".weather__wind");
-let weather__pressure = document.querySelector('.weather__pressure');
-
-
-//search
-document.querySelector(".weather__search").addEventListener('submit', e => {
-    let search = document.querySelector(".weather__searchform");
-    
-    //prevent defualt action
-    e.preventDefault();
-
-    // change currcity
-    currCity = search;
-
-    //get weather forecase
-    getWeather();
-    
-    // clear from
-    search.value = ""
-})
-
-//units
-document.querySelector(".weather_unit_celsius").addEventListener('click', () => {
-    if(units !=="metric")
-    {
-        units = "metric";
-
-        getWeather()
-    }
-})
-
-document.querySelector(".weather_unit_farenheit").addEventListener('click', ()=>{
-    if(units !=="imperial")
-    {
-        units = "imperial";
-
-        getWeather()
-    }
-})
 
 document.body.addEventListener('load', getWeather())
